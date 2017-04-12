@@ -5,8 +5,4 @@ mall-center-mapper/mall-center-mapper.iml
 mall-center-pojo/mall-center-pojo.iml
 mall-center-web/mall-center-web.iml
 mall-center-service/mall-center-service.iml
-mall-center-service/target/*
-mall-center-service/target/*
-mall-center-service/target/*
-mall-center-service/target/*
-mall-center-service/target/*
+**/target/
