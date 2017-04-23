@@ -4,11 +4,13 @@ import com.alibaba.druid.filter.AutoLoad;
 import com.guoyq.pojo.EUDataGridResult;
 import com.guoyq.pojo.TbItem;
 import com.guoyq.service.ItemService;
+import com.guoyq.utils.TaotaoResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -27,6 +29,12 @@ public class ItemController {
     @ResponseBody
     public EUDataGridResult getItemList(Integer page,Integer rows){
         EUDataGridResult result=itemService.getItemList(page,rows);
+        return result;
+    }
+    @RequestMapping(value = "/item/save",method = RequestMethod.POST)
+    @ResponseBody
+    public TaotaoResult createItem(TbItem tbItem){
+        TaotaoResult result=itemService.createItem(tbItem);
         return result;
     }
 }

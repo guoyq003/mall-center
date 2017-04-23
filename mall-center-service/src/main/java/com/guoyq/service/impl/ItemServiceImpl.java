@@ -7,9 +7,12 @@ import com.guoyq.pojo.EUDataGridResult;
 import com.guoyq.pojo.TbItem;
 import com.guoyq.pojo.TbItemExample;
 import com.guoyq.service.ItemService;
+import com.guoyq.utils.IDUtils;
+import com.guoyq.utils.TaotaoResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,6 +20,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private TbItemMapper itemMapper;
+
     @Override
     public TbItem getItemById(long itemId) {
         TbItem item=itemMapper.selectByPrimaryKey(itemId);
@@ -38,5 +42,19 @@ public class ItemServiceImpl implements ItemService {
         result.setCount((int) pageInfo.getTotal());
         return result;
     }
+
+    @Override
+    public TaotaoResult createItem(TbItem tbItem) {
+        //item补全
+        //生成商品ID
+        Long itemId= IDUtils.genItemId();
+        tbItem.setId(itemId);
+        tbItem.setStatus((byte) 1);
+        tbItem.setCreated(new Date());
+        tbItem.setUpdated(new Date());
+        itemMapper.insert(tbItem);
+        return TaotaoResult.ok();
+    }
+
 
 }
