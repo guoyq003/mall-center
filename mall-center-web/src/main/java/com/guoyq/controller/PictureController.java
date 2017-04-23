@@ -1,6 +1,7 @@
 package com.guoyq.controller;
 
 import com.guoyq.service.PictureService;
+import com.guoyq.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,8 +16,10 @@ public class PictureController {
 
     @RequestMapping("/pic/upload")
     @ResponseBody
-    public Map pictureUpload(MultipartFile uploadFile){
+    public String pictureUpload(MultipartFile uploadFile){
         Map resultMap=pictureService.uploadPicture(uploadFile);
-        return resultMap;
+        //为了保证功能的兼容性，需要把返回的结果转换成json格式
+        String resultJson=JsonUtils.objectToJson(resultMap);
+        return resultJson;
     }
 }
